@@ -1,0 +1,30 @@
+#!/bin/bash
+
+echo "Menu:"
+echo "1.List the number of users"
+echo "2.Add User"
+echo "3.Remove user"
+read choice
+
+if [ $choice == 1 ];
+then
+     compgen -u
+elif [ $choice == 2 ];
+then 
+	echo "Enter the username"
+	read username
+	useradd $username
+	echo "Do you want to set a password for the user"
+	read y
+	if [ "$y" == 'yes' ];
+	then
+		passwd $username
+	fi
+elif [ $choice == 3 ];
+then
+	echo "Enter the username"
+	read username
+	userdel -r $username
+else
+	echo "Invalid option"
+fi

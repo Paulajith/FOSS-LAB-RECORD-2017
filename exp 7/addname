@@ -1,0 +1,38 @@
+#!/bin/bash
+
+
+file=$1
+username=$2
+
+
+if [ $# -ne 2 ]; then                                                # $# expands to the number of positional parameters that have been set.
+    echo "Incorrect number of arguments"
+    exit 1
+fi
+
+if [ -f "$file" ]; then
+
+	echo "File Found"
+else
+	echo "File not found"
+	exit 1
+fi
+
+flag=1
+
+while IFS= read line
+do
+	if [ "$line" == "$username" ];
+		then
+			echo "User name found"
+			flag=0;
+			break
+	fi  
+done <"$file"
+
+if [ $flag -ne 0 ] ; then
+	echo "Username not found"
+	echo "Username added at the the end of file"
+	echo "$username" >> "$file"
+fi
+
