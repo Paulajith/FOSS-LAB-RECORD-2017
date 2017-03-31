@@ -1,0 +1,45 @@
+
+
+
+
+
+
+	To install type 
+	sudo apt-get install openssh-server
+	The most basic form of the command is:
+	 ssh remote_host
+	The remote_host in this example is the IP address or domain name that you are trying to connect to.
+	If your username is different on the remote system, you can specify it by using this syntax:
+	$ ssh remote_username@remote_host
+
+
+
+	TO COPY FILES
+		$ scp source destination
+		Copy a file from local to host
+		Code:
+		$scp jsmith@remotehost.example.com:/home/jsmith/remotehostfile.txt
+		remotehostfile.txt
+
+
+
+
+	Copy file from host to local
+		Code:
+		$scp localhostfile.txt
+		jsmith@remotehost.example.com:/home/jsmith/localhostfile.txt
+
+
+	Copy file from host to local
+		Code:
+		$scp localhostfile.txt
+		jsmith@remotehost.example.com:/home/jsmith/localhostfile.txt
+
+
+
+	TO SHUTDOWN CONNECTED COPMUTER 
+		$ssh user@remote_computer
+		$sudo poweroff
+		$sudo reboot 
+
+

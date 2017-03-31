@@ -1,0 +1,48 @@
+
+
+
+    GREP – Global Regular Expression Print
+ 	Searches for text in a file
+ 	Can search for simple words.
+ 	Can look for “regular expression”;more complex charecter strings( words followed by any no of spaces, followed by a digit or lowercase 		letter).
+
+
+	Searching the given string
+
+		     $ grep “literal_string” filename
+			To search a specific string in a specified file
+
+
+	Case insensitive search
+	
+			        $ grep -i “string” filename
+       				 $ grep -i “string” FILE_PATTERN*
+				-This searches for given string/pattern case insensitively.
+
+
+	Simple regular expressions
+
+				“[0-9]” look for any digit
+
+
+
+				“[a-zA-Z]” look for one upper or lower case letter	
+
+
+				“.” look for one charecter
+				“.*” any number of charecters
+				 “\.” a literal decimal point
+				“\.161:” dot, then 161,then colon 
+				“\.161[: ]” dot, then 161, then colon or space	
+
+
+	Advanced regular expressions
+
+				Look for lines that hold either string1 or string2
+				$ grep -E ‘(string1|string2)’ filename 
+				Lines that have string1 followed by string2 on the same line, but possibly with other charecters in between.
+				$ grep ‘string1.*string2’ filename	
+				String1 has to be at the beginning of the line.
+				$ grep ‘^string1’ filename
+				Look for it at the end of the line.
+				$ grep ‘string1$’ filename

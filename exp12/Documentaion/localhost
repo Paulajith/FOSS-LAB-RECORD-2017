@@ -1,0 +1,102 @@
+Introduction
+
+A "LAMP" stack is a group of open source software that is typically installed together to enable a server to host dynamic websites and web apps. This term is actually an acronym which represents the Linux operating system, with the Apache web server. The site data is stored in a MySQL database, and dynamic content is processed by PHP.
+
+In this guide, we'll get a LAMP stack installed on an Ubuntu 16.04 Droplet. Ubuntu will fulfill our first requirement: a Linux operating system.
+
+Prerequisites
+Before you begin with this guide, you should have a separate, non-root user account with sudo privileges set up on your server. You can learn how to do this by completing steps 1-4 in the initial server setup for Ubuntu 16.04.
+
+Step 1: Install Apache and Allow in Firewall
+The Apache web server is among the most popular web servers in the world. It's well-documented, and has been in wide use for much of the history of the web, which makes it a great default choice for hosting a website.
+
+We can install Apache easily using Ubuntu's package manager, apt. A package manager allows us to install most software pain-free from a repository maintained by Ubuntu. You can learn more about how to use apt here.
+
+For our purposes, we can get started by typing these commands:
+
+sudo apt-get update
+sudo apt-get install apache2
+Since we are using a sudo command, these operations get executed with root privileges. It will ask you for your regular user's password to verify your intentions.
+
+Once you've entered your password, apt will tell you which packages it plans to install and how much extra disk space they'll take up. Press Y and hit Enter to continue, and the installation will proceed.
+
+Set Global ServerName to Suppress Syntax Warnings
+
+Next, we will add a single line to the /etc/apache2/apache2.conf file to suppress a warning message. While harmless, if you do not set ServerName globally, you will receive the following warning when checking your Apache configuration for syntax errors:
+
+sudo apache2ctl configtest
+Output
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. Set the 'ServerName' directive globally to suppress this message
+Syntax OK
+Open up the main configuration file with your text edit:
+
+sudo nano /etc/apache2/apache2.conf
+Inside, at the bottom of the file, add a ServerName directive, pointing to your primary domain name. If you do not have a domain name associated with your server, you can use your server's public IP address:
+
+Note
+If you don't know your server's IP address, skip down to the section on how to find your server's public IP address to find it.
+/etc/apache2/apache2.conf
+. . .
+ServerName server_domain_or_IP
+Save and close the file when you are finished.
+
+Next, check for syntax errors by typing:
+
+sudo apache2ctl configtest
+Since we added the global ServerName directive, all you should see is:
+
+Output
+Syntax OK
+Restart Apache to implement your changes:
+
+sudo systemctl restart apache2
+You can now begin adjusting the firewall.
+
+Adjust the Firewall to Allow Web Traffic
+
+Next, assuming that you have followed the initial server setup instructions to enable the UFW firewall, make sure that your firewall allows HTTP and HTTPS traffic. You can make sure that UFW has an application profile for Apache like so:
+
+sudo ufw app list
+Output
+Available applications:
+  Apache
+  Apache Full
+  Apache Secure
+  OpenSSH
+If you look at the Apache Full profile, it should show that it enables traffic to ports 80 and 443:
+
+sudo ufw app info "Apache Full"
+Output
+Profile: Apache Full
+Title: Web Server (HTTP,HTTPS)
+Description: Apache v2 is the next generation of the omnipresent Apache web
+server.
+
+Ports:
+  80,443/tcp
+Allow incoming traffic for this profile:
+
+sudo ufw allow in "Apache Full"
+You can do a spot check right away to verify that everything went as planned by visiting your server's public IP address in your web browser (see the note under the next heading to find out what your public IP address is if you do not have this information already):
+
+http://your_server_IP_address
+You will see the default Ubuntu 16.04 Apache web page, which is there for informational and testing purposes. It should look something like this:
+
+Ubuntu 16.04 Apache default
+
+If you see this page, then your web server is now correctly installed and accessible through your firewall.
+
+How To Find your Server's Public IP Address
+
+If you do not know what your server's public IP address is, there are a number of ways you can find it. Usually, this is the address you use to connect to your server through SSH.
+
+From the command line, you can find this a few ways. First, you can use the iproute2 tools to get your address by typing this:
+
+ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
+This will give you two or three lines back. They are all correct addresses, but your computer may only be able to use one of them, so feel free to try each one.
+
+An alternative method is to use the curl utility to contact an outside party to tell you how it sees your server. You can do this by asking a specific server what your IP address is:
+
+sudo apt-get install curl
+curl http://icanhazip.com
+Regardless of the method you use to get your IP address, you can type it into your web browser's address bar to get to your server.

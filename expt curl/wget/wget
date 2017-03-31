@@ -1,0 +1,39 @@
+WGET:
+            wget stands for "web get". It is a command-line utility which downloads files over a network.
+
+
+The command will download single file and stores in a current directory. It also shows download progress, size, date and time while downloading.
+Command
+wget http://www.openss7.org/repos/tarballs/strx25-0.9.2.1.tar.bz2
+
+
+Using -O (uppercase) option, downloads file with different file name. Here we have given wget.zip file name as show below.
+Command:
+wget -O wget.zip http://ftp.gnu.org/gnu/wget/wget-1.5.3.tar.gz
+
+
+
+Restart a download which got stopped in the middle using wget -c option as shown below.
+Command:
+Wget -c http://www.openss7.org/repos/tarballs/strx25-0.9.2.1.tar.bz2
+
+
+Command:
+wget -b http://www.openss7.org/repos/tarballs/strx25-0.9.2.1.tar.bz2
+
+
+
+Emulating a Complete Website
+
+
+		If you wish to retain a copy of any website that you may like to refer to/read locally, or maybe save a copy of your blog to the hard disk as back up, you may execute the wget command with mirror option, as follows:
+Command:
+			wget --mirror [Website Name]
+
+
+Download Multiple Files / URLs Using Wget -i
+
+
+		First, store all the download files or URLs in a text file 
+Command:
+wget -i download-file-list.txt

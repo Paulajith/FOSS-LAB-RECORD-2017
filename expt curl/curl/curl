@@ -1,0 +1,23 @@
+Curl 
+
+
+
+curl link 
+
+			:gives us the infromation about the webpage it stdouts the html code .
+
+
+curl -O link/file.html
+	
+			:copies the content that is the html code to the file.html .
+
+curl -o file.html link 
+
+  			:  copies the content that is the html code to the file.html .
+
+
+cascading curl 		
+			:syntax curl -O link/file1 -O lin/file2
+
+
+ 

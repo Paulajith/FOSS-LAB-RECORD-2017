@@ -1,0 +1,60 @@
+
+
+
+	FTP – File Transfer Protocol
+	 It is the simplest and most secure way to exchange files over Internet.
+	Transferring files,
+	 From client computer to a server computer
+	 										- Uploading
+	 From server computer to a client computer
+		                                - Downloading
+
+	To access an FTP server, users must be able to connect to the internet.
+	FTP doesn’t not really move, it copies files from one computer to another.
+	An FTP Client is software that is designed to move files back-and-forth between two computers over the Internet.
+
+
+
+ 	Connect to a FTP site
+
+		$ ftp IP/hostname
+			    or
+		$ ftp
+		ftp> open IP/hostname
+		You can directly open connection with a remote host using it’s IP or host name from the command line.
+
+
+	Listing the contents
+
+		ftp> ls
+		You can view the content of a remote directory using the ls / dir command
+
+
+	Set a download directory
+
+		ftp> lcd /home/user/yourdirectoryname
+		Before downloading a file, we should set the local ftp file download directory by using lcd command
+
+	Download a file
+
+		ftp> get FILENAME
+		Using the get command to download file from a remote ftp server	
+
+	Download multiple files
+
+		ftp> mget *.file extension
+		mget command helps to download multiple files with same file extension.
+
+	Uploading file to FTP server
+
+		ftp> put FILENAME
+		To upload a file we can use put command.
+		ftp> put /path/FILENAME
+		When the file you want to upload is not in local directory.
+		ftp> mput *.file extension
+		To upload multiple files of same file extension, we can use mput command.
+
+	Closing the FTP connection
+
+		ftp> close
+		Without exiting the ftp prompt you may want to open a connection to another server. In that execute close command		

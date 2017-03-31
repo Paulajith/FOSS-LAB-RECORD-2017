@@ -1,0 +1,148 @@
+AWK is very powerful and efficient in handling regular expressions. A number of complex tasks can be solved with simple regular expressions. Any command-line expert knows the power of regular expressions.
+
+This chapter covers standard regular expressions with suitable examples.
+Dot
+****
+
+It matches any single character except the end of line character. For instance, the following example matches fin, fun, fan etc.
+Example
+
+[jerry]$ echo -e "cat\nbat\nfun\nfin\nfan" | awk '/f.n/'
+
+On executing the above code, you get the following result −
+Output
+
+fun
+fin
+fan
+
+Start of line
+*************
+It matches the start of line. For instance, the following example prints all the lines that start with pattern The.
+Example
+
+[jerry]$ echo -e "This\nThat\nThere\nTheir\nthese" | awk '/^The/'
+
+On executing this code, you get the following result −
+Output
+
+There
+Their
+
+End of line
+**************
+
+It matches the end of line. For instance, the following example prints the lines that end with the letter n.
+Example
+
+[jerry]$ echo -e "knife\nknow\nfun\nfin\nfan\nnine" | awk '/n$/'
+
+Output
+
+On executing this code, you get the following result −
+
+fun
+fin
+fan
+
+Match character set
+*********************
+
+It is used to match only one out of several characters. For instance, the following example matches pattern Call and Tall but not Ball.
+Example
+
+[jerry]$ echo -e "Call\nTall\nBall" | awk '/[CT]all/'
+
+Output
+
+On executing this code, you get the following result −
+
+Call
+Tall
+
+Exclusive set
+***************
+
+In exclusive set, the carat negates the set of characters in the square brackets. For instance, the following example prints only Ball.
+Example
+
+[jerry]$ echo -e "Call\nTall\nBall" | awk '/[^CT]all/'
+
+On executing this code, you get the following result −
+Output
+
+Ball
+
+Alteration
+***********
+
+A vertical bar allows regular expressions to be logically ORed. For instance, the following example prints Ball and Call.
+Example
+
+[jerry]$ echo -e "Call\nTall\nBall\nSmall\nShall" | awk '/Call|Ball/'
+
+On executing this code, you get the following result −
+Output
+
+Call
+Ball
+
+Zero or One Occurrence
+*******************
+
+It matches zero or one occurrence of the preceding character. For instance, the following example matches Colour as well as Color. We have made u as an optional character by using ?.
+Example
+
+[jerry]$ echo -e "Colour\nColor" | awk '/Colou?r/'
+
+On executing this code, you get the following result −
+Output
+
+Colour
+Color
+
+Zero or More Occurrence
+*************************
+
+It matches zero or more occurrences of the preceding character. For instance, the following example matches ca, cat, catt, and so on.
+Example
+
+[jerry]$ echo -e "ca\ncat\ncatt" | awk '/cat*/'
+
+On executing this code, you get the following result −
+Output
+
+ca
+cat
+catt
+
+One or More Occurrence
+******************************
+
+It matches one or more occurrence of the preceding character. For instance below example matches one or more occurrences of the 2.
+Example
+
+[jerry]$ echo -e "111\n22\n123\n234\n456\n222"  | awk '/2+/'
+
+On executing the above code, you get the following result −
+Output
+
+22
+123
+234
+222
+
+Grouping
+************
+
+Parentheses () are used for grouping and the character | is used for alternatives. For instance, the following regular expression matches the lines containing either Apple Juice or Apple Cake.
+Example
+
+[jerry]$ echo -e "Apple Juice\nApple Pie\nApple Tart\nApple Cake" | awk 
+   '/Apple (Juice|Cake)/'
+
+On executing this code, you get the following result −
+Output
+
+Apple Juice
+Apple Cake
