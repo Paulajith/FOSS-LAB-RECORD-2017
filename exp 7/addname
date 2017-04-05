@@ -18,21 +18,12 @@ else
 	exit 1
 fi
 
-flag=1
-
-while IFS= read line
-do
-	if [ "$line" == "$username" ];
-		then
-			echo "User name found"
-			flag=0;
-			break
-	fi  
-done <"$file"
-
-if [ $flag -ne 0 ] ; then
+if grep -i -w "$username" $file
+then 
+        echo "Username already Exist"
+else 
 	echo "Username not found"
-	echo "Username added at the the end of file"
-	echo "$username" >> "$file"
-fi
+        echo "$username">>$file
+        echo "Username added at the end of the file"
+fi 
 

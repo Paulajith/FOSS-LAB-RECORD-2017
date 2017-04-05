@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 echo "Menu:"
 echo "1.List the number of users"
 echo "2.Add User"
@@ -28,3 +29,4 @@ then
 else
 	echo "Invalid option"
 fi
+

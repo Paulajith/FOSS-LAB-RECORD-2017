@@ -1,0 +1,6 @@
+#!/bin/bash
+
+-> OS versions   : echo -e "`cat /etc/os-release`"
+		-> shells        : echo -e "`cat /etc/shells`"
+		-> mouse settings: echo -e "`xstq`"	
+		-> processor info: echo -e "`cat /proc/meminfo`echo -e "`cat /proc/mounts`"
